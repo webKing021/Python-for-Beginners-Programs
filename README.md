@@ -19,6 +19,7 @@
 9. 🧰 [String Functions](#-string-functions)
 10. 📋 [Menu-Driven Programming](#-menu-driven-programming)
 11. 🔄 [Loop Exercise Programs](#-loop-exercise-programs)
+12. 📋 [List Operations](#-list-operations)
 ---
 
 ## 📤 Basic Output
@@ -769,6 +770,117 @@ Here are some practical loop exercise programs to practice Python loops:
         num //= 10
     print(f"Reversed number: {reversed_num}")  # Outputs: Reversed number: 54321
     ```
+
+## 📋 List Operations
+
+### 📝 List Methods
+**Definition**: Python lists have built-in methods for adding, removing, and manipulating elements.
+
+```python
+# Common List Methods
+my_list = [1, 2, 3, 4, 5]
+
+# Adding elements
+my_list.append(6)        # Adds element to the end: [1, 2, 3, 4, 5, 6]
+my_list.insert(0, 0)     # Inserts element at index: [0, 1, 2, 3, 4, 5, 6]
+my_list.extend([7, 8])   # Adds multiple elements: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+
+# Removing elements
+my_list.remove(0)        # Removes first occurrence of value: [1, 2, 3, 4, 5, 6, 7, 8]
+popped = my_list.pop()   # Removes and returns last element: 8, list becomes [1, 2, 3, 4, 5, 6, 7]
+popped = my_list.pop(0)  # Removes element at index: 1, list becomes [2, 3, 4, 5, 6, 7]
+
+# Other operations
+len(my_list)             # Returns length of list: 6
+my_list.count(3)         # Counts occurrences of element: 1
+my_list.index(5)         # Returns index of first occurrence: 3
+my_list.sort()           # Sorts list in-place: [2, 3, 4, 5, 6, 7]
+my_list.reverse()        # Reverses list in-place: [7, 6, 5, 4, 3, 2]
+```
+
+### 📚 Stack Implementation
+**Definition**: A stack is a Last-In-First-Out (LIFO) data structure that can be implemented using a Python list.
+
+```python
+# Stack implementation using a list
+stack = []
+
+# Push operation (add to top)
+stack.append(1)    # [1]
+stack.append(2)    # [1, 2]
+stack.append(3)    # [1, 2, 3]
+
+# Pop operation (remove from top)
+top_item = stack.pop()  # Returns 3, stack becomes [1, 2]
+top_item = stack.pop()  # Returns 2, stack becomes [1]
+
+# Check if stack is empty
+is_empty = len(stack) == 0  # False
+```
+
+### 🔄 Queue Implementation
+**Definition**: A queue is a First-In-First-Out (FIFO) data structure that can be implemented using a Python list.
+
+```python
+# Queue implementation using a list
+queue = []
+
+# Enqueue operation (add to end)
+queue.append(1)    # [1]
+queue.append(2)    # [1, 2]
+queue.append(3)    # [1, 2, 3]
+
+# Dequeue operation (remove from front)
+front_item = queue.pop(0)  # Returns 1, queue becomes [2, 3]
+front_item = queue.pop(0)  # Returns 2, queue becomes [3]
+
+# Check if queue is empty
+is_empty = len(queue) == 0  # False
+```
+
+### 🔍 List Manipulation
+
+#### Finding Duplicates
+**Definition**: Identifying and handling duplicate elements in a list.
+
+```python
+# Finding duplicates in a list
+original_list = [1, 2, 3, 4, 5, 3, 2, 7]
+unique_list = []
+duplicates = []
+
+for item in original_list:
+    if item not in unique_list:
+        unique_list.append(item)
+    else:
+        duplicates.append(item)
+
+print(f"Original list: {original_list}")  # [1, 2, 3, 4, 5, 3, 2, 7]
+print(f"Unique elements: {unique_list}")  # [1, 2, 3, 4, 5, 7]
+print(f"Duplicates: {duplicates}")        # [3, 2]
+```
+
+#### Merging Lists Without Duplicates
+**Definition**: Combining two lists while ensuring no duplicate elements in the result.
+
+```python
+# Method 1: Using sets
+list1 = [1, 2, 3, 4, 5]
+list2 = [4, 5, 6, 7, 8]
+merged_list = list(set(list1 + list2))
+print(f"Merged list (using set): {merged_list}")  # [1, 2, 3, 4, 5, 6, 7, 8]
+
+# Method 2: Using a loop
+list1 = [1, 2, 3, 4, 5]
+list2 = [4, 5, 6, 7, 8]
+merged_list = list1.copy()
+
+for item in list2:
+    if item not in merged_list:
+        merged_list.append(item)
+
+print(f"Merged list (using loop): {merged_list}")  # [1, 2, 3, 4, 5, 6, 7, 8]
+```
 
 <div align="center">
 
