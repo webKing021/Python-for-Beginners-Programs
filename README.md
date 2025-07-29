@@ -20,6 +20,8 @@
 10. 📋 [Menu-Driven Programming](#-menu-driven-programming)
 11. 🔄 [Loop Exercise Programs](#-loop-exercise-programs)
 12. 📋 [List Operations](#-list-operations)
+13. 📝 [String Operations](#-string-operations)
+14. 🔤 [Vowels and Consonants](#-vowels-and-consonants)
 ---
 
 ## 📤 Basic Output
@@ -881,7 +883,126 @@ for item in list2:
 
 print(f"Merged list (using loop): {merged_list}")  # [1, 2, 3, 4, 5, 6, 7, 8]
 ```
+---
 
+## 📝 String Operations
+
+### 📊 String Basics
+**Definition**: Strings are sequences of characters enclosed in quotes.
+
+```python
+s = "python"  # A string variable
+```
+
+### 📏 String Length
+**Definition**: The `len()` function returns the number of characters in a string.
+
+```python
+s = "python"
+print(len(s))  # Outputs: 6
+```
+
+### 🔍 Accessing Characters
+**Definition**: Characters in a string can be accessed using indexing (starting from 0).
+
+```python
+s = "python"
+print(s[0])  # Outputs: p
+print(s[3])  # Outputs: h
+```
+
+### 🔪 String Slicing
+**Definition**: Extracting a portion of a string using a range of indices.
+
+```python
+s = "python"
+print(s[0:2])  # Outputs: py
+```
+
+### 🔗 String Concatenation
+**Definition**: Joining two or more strings together using the `+` operator.
+
+```python
+s1 = "python"
+s2 = " programming"
+print(s1 + s2)  # Outputs: python programming
+```
+
+### 🔄 String Repetition
+**Definition**: Repeating a string multiple times using the `*` operator.
+
+```python
+s = "python"
+print(s * 3)  # Outputs: pythonpythonpython
+```
+
+### 🔍 Membership Operators
+**Definition**: Checking if a character or substring exists in a string.
+
+```python
+s = "python"
+print("y" in s)      # Outputs: True
+print("z" not in s)  # Outputs: True
+```
+
+### 🔪 String Split
+**Definition**: Dividing a string into a list of substrings based on a delimiter.
+
+```python
+s = "apple,banana,orange"
+print(s.split(","))  # Outputs: ['apple', 'banana', 'orange']
+```
+
+### 🔢 String Count
+**Definition**: Counting occurrences of a substring in a string.
+
+```python
+s = "python programming is fun, python is easy"
+print(s.count("python"))  # Outputs: 2
+```
+
+---
+
+## 🔤 Vowels and Consonants
+
+### 📊 Counting Vowels and Consonants
+**Definition**: Identifying and counting vowels (a, e, i, o, u) and consonants in a string.
+
+#### Method 1: Without Membership Operator
+```python
+str = "Hello World"
+vcnt = 0
+ccnt = 0
+
+for i in str:
+    if (i == "a" or i == "e" or i == "i" or i == "o" or i == "u" or \
+        i == "A" or i == "E" or i == "I" or i == "O" or i == "U"):
+        vcnt = vcnt + 1
+    else:
+        ccnt = ccnt + 1
+
+print(f"Vowels: {vcnt}")
+print(f"Consonants: {ccnt}")
+```
+
+#### Method 2: With Membership Operator
+```python
+str = "Hello World"
+vcnt = 0
+ccnt = 0
+vowels = 'aeiouAEIOU'
+
+for i in str:
+    if (i in vowels):
+        vcnt = vcnt + 1
+    else:
+        ccnt = ccnt + 1
+
+print(f"Vowels: {vcnt}")            
+print(f"Consonants: {ccnt}")
+```
+
+---
 <div align="center">
 
 ### 🐍 Happy Python Coding! 🐍
