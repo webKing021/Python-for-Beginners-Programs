@@ -888,10 +888,13 @@ print(f"Merged list (using loop): {merged_list}")  # [1, 2, 3, 4, 5, 6, 7, 8]
 ## 📝 String Operations
 
 ### 📊 String Basics
-**Definition**: Strings are sequences of characters enclosed in quotes.
+**Definition**: Strings are sequences of characters enclosed in quotes (single, double, or triple quotes).
 
 ```python
-s = "python"  # A string variable
+s1 = "python"      # Double quotes
+s2 = 'python'      # Single quotes
+s3 = """python"""  # Triple quotes
+empty_str = ""    # Empty string
 ```
 
 ### 📏 String Length
@@ -907,16 +910,20 @@ print(len(s))  # Outputs: 6
 
 ```python
 s = "python"
-print(s[0])  # Outputs: p
-print(s[3])  # Outputs: h
+print(s[0])  # Outputs: p (first character)
+print(s[3])  # Outputs: h (fourth character)
 ```
 
 ### 🔪 String Slicing
-**Definition**: Extracting a portion of a string using a range of indices.
+**Definition**: Extracting a portion of a string using a range of indices with format `[start:end]` (end index is exclusive).
 
 ```python
 s = "python"
-print(s[0:2])  # Outputs: py
+print(s[0:2])   # Outputs: py (characters from index 0 to 1)
+print(s[0:])    # Outputs: python (all characters from index 0)
+print(s[:3])    # Outputs: pyt (characters from start to index 2)
+print(s[:])     # Outputs: python (all characters)
+print(s[::-1])  # Outputs: nohtyp (reversed string)
 ```
 
 ### 🔗 String Concatenation
@@ -937,28 +944,125 @@ print(s * 3)  # Outputs: pythonpythonpython
 ```
 
 ### 🔍 Membership Operators
-**Definition**: Checking if a character or substring exists in a string.
+**Definition**: Checking if a character or substring exists in a string using `in` and `not in` operators.
 
 ```python
 s = "python"
-print("y" in s)      # Outputs: True
-print("z" not in s)  # Outputs: True
+print("y" in s)       # Outputs: True
+print("z" not in s)   # Outputs: True
+print("Py" in s)      # Outputs: False (case-sensitive)
 ```
 
 ### 🔪 String Split
-**Definition**: Dividing a string into a list of substrings based on a delimiter.
+**Definition**: Dividing a string into a list of substrings based on a delimiter using the `split()` method.
 
 ```python
-s = "apple,banana,orange"
-print(s.split(","))  # Outputs: ['apple', 'banana', 'orange']
+# With specified delimiter
+s1 = "apple,banana,orange"
+print(s1.split(","))  # Outputs: ['apple', 'banana', 'orange']
+
+# Without delimiter (splits by whitespace)
+s2 = "apple banana orange"
+print(s2.split())     # Outputs: ['apple', 'banana', 'orange']
+
+# Split by character
+s3 = "Batman, Superman, Ironman"
+print(s3.split("a"))  # Outputs: ['B', 'tm', 'n, Superm', 'n, Ironm', 'n']
 ```
 
 ### 🔢 String Count
-**Definition**: Counting occurrences of a substring in a string.
+**Definition**: Counting occurrences of a substring in a string using the `count()` method.
 
 ```python
 s = "python programming is fun, python is easy"
 print(s.count("python"))  # Outputs: 2
+
+# Count with range
+s = "Spiderman"
+print(s.count("Spiderman", 0, 10))  # Outputs: 1 (count in range 0-9)
+
+# Count individual characters
+s = "krutarth is good"
+print(s.count("a"))  # Outputs: 1
+print(s.count("i"))  # Outputs: 1
+```
+
+### 🔠 Case Conversion
+**Definition**: Methods to change the case of strings.
+
+```python
+s = "Krutarth Python"
+print(s.upper())       # Outputs: KRUTARTH PYTHON
+print(s.lower())       # Outputs: krutarth python
+print(s.title())       # Outputs: Krutarth Python
+print(s.capitalize())  # Outputs: Krutarth python
+print(s.swapcase())    # Outputs: kRUTARTH pYTHON
+```
+
+### 🧹 Stripping Spaces
+**Definition**: Methods to remove leading and trailing whitespace.
+
+```python
+s = "   krutarth   "
+print(s.strip())    # Outputs: "krutarth"
+print(s.lstrip())   # Outputs: "krutarth   "
+print(s.rstrip())   # Outputs: "   krutarth"
+```
+
+### 🔄 Replace
+**Definition**: Replace occurrences of a substring with another using the `replace()` method.
+
+```python
+s = "I am Batman"
+print(s.replace("Batman", "Superman"))  # Outputs: I am Superman
+
+# Replace with count
+print(s.replace("a", "e", 1))  # Outputs: I em Batman (only first 'a' replaced)
+```
+
+### 🔗 Join
+**Definition**: Join elements of an iterable (like list) into a string using a specified delimiter.
+
+```python
+fruits = ['apple', 'banana', 'mango']
+print(", ".join(fruits))  # Outputs: apple, banana, mango
+```
+
+### 🔍 Find and Index
+**Definition**: Methods to find the position of a substring in a string.
+
+```python
+s = "Batman loves Catwoman"
+
+# find() - returns index or -1 if not found
+print(s.find("o"))        # Outputs: 10
+print(s.find("xyz"))      # Outputs: -1
+
+# index() - returns index or raises ValueError if not found
+print(s.index("Catwoman"))  # Outputs: 13
+
+# rfind() and rindex() - search from right to left
+s = "hello world hello"
+print(s.rfind("hello"))    # Outputs: 12
+print(s.rindex("hello"))   # Outputs: 12
+```
+
+### 🔤 Character Type Checking
+**Definition**: Methods to check the type of characters in a string.
+
+```python
+print("123".isdigit())      # Outputs: True (only digits)
+print("abc".isalpha())      # Outputs: True (only alphabets)
+print("abc123".isalnum())   # Outputs: True (only alphanumeric)
+print("   ".isspace())      # Outputs: True (only whitespace)
+```
+
+### 0️⃣ Zero Fill
+**Definition**: Pad a string with zeros on the left using the `zfill()` method.
+
+```python
+print("123".zfill(5))  # Outputs: 00123
+print("123".zfill(2))  # Outputs: 123 (width less than string length)
 ```
 
 ---

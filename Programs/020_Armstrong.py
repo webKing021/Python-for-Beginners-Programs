@@ -7,8 +7,8 @@ temp = num
 
 while temp > 0:
     digit = temp % 10
-    sum += digit * digit * digit
-    temp = int(temp / 10)  # Using normal division and converting to int
+    sum = sum + digit * digit * digit
+    temp = int(temp / 10)  
 
 if num == sum:
     print(f"{num} is an Armstrong number")
