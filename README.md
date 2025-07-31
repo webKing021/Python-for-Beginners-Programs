@@ -22,6 +22,9 @@
 12. 📋 [List Operations](#-list-operations)
 13. 📝 [String Operations](#-string-operations)
 14. 🔤 [Vowels and Consonants](#-vowels-and-consonants)
+15. 🧵 [String Immutability](#-string-immutability)
+16. 📋 [List Comprehensions](#-list-comprehensions)
+17. 🗑️ [Del Statement and Copy Operations](#️-del-statement-and-copy-operations)
 ---
 
 ## 📤 Basic Output
@@ -1105,6 +1108,137 @@ for i in str:
 print(f"Vowels: {vcnt}")            
 print(f"Consonants: {ccnt}")
 ```
+
+---
+
+## 🧵 String Immutability
+
+**Definition**: In Python, strings are immutable, which means once a string is created, its contents cannot be changed.
+
+### 📝 Immutability Demonstration
+
+```python
+# Attempting to change a character in a string
+s = "Hello"
+try:
+    s[0] = "h"  # This will raise an error
+except TypeError as e:
+    print(f"Error: {e}")  # Outputs: Error: 'str' object does not support item assignment
+
+# Creating a new string is the correct way
+s = "Hello"
+new_s = "h" + s[1:]  # Creates a new string
+print(new_s)  # Outputs: hello
+```
+
+### 📚 Multiline Strings
+
+```python
+# Using triple quotes for multiline strings
+multiline_str = """This is a multiline string.
+It can span multiple lines.
+Very useful for documentation."""
+print(multiline_str)
+```
+
+---
+
+## 📋 List Comprehensions
+
+**Definition**: List comprehensions provide a concise way to create lists based on existing lists or other iterables.
+
+### 🔄 Basic Syntax
+
+```python
+# Basic syntax: [expression for item in iterable if condition]
+```
+
+### 📊 Examples
+
+```python
+# Square numbers from 1 to 10
+squares = [x**2 for x in range(1, 11)]
+print(squares)  # Outputs: [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+
+# Filter even numbers
+even_numbers = [x for x in range(1, 11) if x % 2 == 0]
+print(even_numbers)  # Outputs: [2, 4, 6, 8, 10]
+
+# Transpose a matrix
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+transposed = [[row[i] for row in matrix] for i in range(len(matrix[0]))]
+print(transposed)  # Outputs: [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
+```
+
+---
+
+## 🗑️ Del Statement and Copy Operations
+
+### 🗑️ Del Statement
+
+**Definition**: The `del` statement is used to delete objects in Python, including list elements, entire lists, variables, etc.
+
+```python
+# Delete an element from a list
+my_list = [1, 2, 3, 4, 5]
+del my_list[2]  # Deletes the element at index 2
+print(my_list)  # Outputs: [1, 2, 4, 5]
+
+# Delete a slice from a list
+my_list = [1, 2, 3, 4, 5]
+del my_list[1:3]  # Deletes elements at index 1 and 2
+print(my_list)  # Outputs: [1, 4, 5]
+
+# Delete the entire list
+my_list = [1, 2, 3, 4, 5]
+del my_list
+# print(my_list)  # This would raise a NameError as my_list no longer exists
+```
+
+### 📋 Copy Operations
+
+**Definition**: In Python, there are multiple ways to copy or clone a list.
+
+#### 🔄 Shallow Copy Methods
+
+```python
+# Using the copy() method
+original = [1, 2, [3, 4]]
+shallow_copy1 = original.copy()
+
+# Using slice operator
+shallow_copy2 = original[:]
+
+# Using the list() function
+shallow_copy3 = list(original)
+
+# Using the extend() method
+shallow_copy4 = []
+shallow_copy4.extend(original)
+```
+
+#### 🔍 Deep Copy
+
+```python
+import copy
+
+original = [1, 2, [3, 4]]
+deep_copy = copy.deepcopy(original)
+
+# Modifying the nested list in the original won't affect the deep copy
+original[2][0] = 'X'
+print(original)    # Outputs: [1, 2, ['X', 4]]
+print(deep_copy)   # Outputs: [1, 2, [3, 4]]
+```
+
+#### 📊 Shallow vs Deep Copy Comparison
+
+| Feature | Shallow Copy | Deep Copy |
+|---------|-------------|----------|
+| Nested Objects | References the same objects | Creates new copies of nested objects |
+| Memory Usage | Less memory | More memory |
+| Speed | Faster | Slower |
+| Use Case | When nested objects don't need independent copies | When complete independence is required |
 
 ---
 <div align="center">
