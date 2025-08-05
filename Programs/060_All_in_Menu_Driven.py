@@ -41,7 +41,6 @@ while ch != 6:
          
     elif (ch == 3):
         n = int(input("Enter a number: "))
-        # Convert number to string and reverse it
         r = int(str(n)[::-1])
         print("Reverse Number:", r)
         

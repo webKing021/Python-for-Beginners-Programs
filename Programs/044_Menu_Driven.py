@@ -6,25 +6,20 @@ while(ch != 5):
     print("1. Decimal to Binary")
     print("2. Decimal to Octal")
     print("3. Decimal to Hexa")
-    print("4. Decimal to Base-32")
-    print("5. Exit")
+    print("4. Exit")
 
     ch = int(input("Enter your choice: "))
     
     if(ch == 1):
         num = int(input("Enter decimal number: "))
-        print(bin(num))  # Converts to binary
+        print(bin(num)) 
     elif(ch == 2):
         num = int(input("Enter decimal number: "))
-        print(oct(num))  # Converts to octal
+        print(oct(num)) 
     elif(ch == 3):
         num = int(input("Enter decimal number: "))
-        print(hex(num))  # Converts to hexadecimal
+        print(hex(num))  
     elif(ch == 4):
-        num = int(input("Enter decimal number: "))
-        # Custom conversion to base-32
-        print("Base-32 conversion requires custom implementation")
-    elif(ch == 5):
         print("Exit")
     else:
         print("Invalid choice")

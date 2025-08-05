@@ -25,6 +25,8 @@
 15. 🧵 [String Immutability](#-string-immutability)
 16. 📋 [List Comprehensions](#-list-comprehensions)
 17. 🗑️ [Del Statement and Copy Operations](#️-del-statement-and-copy-operations)
+18. 📦 [Tuple Operations](#-tuple-operations)
+19. 💾 [File Handling](#-file-handling)
 ---
 
 ## 📤 Basic Output
@@ -1239,6 +1241,77 @@ print(deep_copy)   # Outputs: [1, 2, [3, 4]]
 | Memory Usage | Less memory | More memory |
 | Speed | Faster | Slower |
 | Use Case | When nested objects don't need independent copies | When complete independence is required |
+
+---
+
+## 📦 Tuple Operations
+
+**Definition**: Tuples are ordered, immutable collections (cannot be changed after creation). They are created using parentheses `()` and are useful for storing heterogeneous data.
+
+### 🔹 Creating Tuples
+```python
+empty_tuple = ()
+singleton = ("Krutarth",)  # Note the trailing comma
+mixed = (21, "Krutarth", 9.29)
+nested = ("Krutarth", [1, 2, 3], (4, 5, 6))
+```
+
+### 🔄 Tuple Unpacking
+```python
+t = (1, 2, 3)
+a, b, c = t
+print(a, b, c)  # Outputs: 1 2 3
+```
+
+### 🛠️ Tuple CRUD Example (from `065_Tuple_CURD.py`)
+```python
+t = (1, 2, 3, 4, 5)
+# Add element 99 at index 2
+t = t[:2] + (99,) + t[2:]
+print(t)  # (1, 2, 99, 3, 4, 5)
+# Delete element at index 3
+t = t[:3] + t[4:]
+print(t)  # (1, 2, 99, 4, 5)
+# Update element at index 1 to 42
+t = t[:1] + (42,) + t[2:]
+print(t)  # (1, 42, 99, 4, 5)
+```
+
+💡 **Immutability Reminder**: Any "modification" of a tuple actually creates a new tuple; the original remains unchanged.
+
+---
+
+## 💾 File Handling
+
+**Definition**: Python provides built-in functions to read from and write to files using `open()`.
+
+### 📂 Opening a File
+```python
+# Open a file in read mode\ nf = open("emp.txt", "r")
+```
+Mode | Description
+---- | -----------
+`"r"` | Read (default)
+`"w"` | Write (truncate if exists / create new)
+`"a"` | Append (create if not exists)
+`"x"` | Create and fail if file exists
+`"b"` | Binary mode (e.g., "rb")
+
+### 📖 Reading a File (from `067_File_Open.py`)
+```python
+f = open("emp.txt", "r")
+for line in f:
+    empno, name, salary = line.split(",")
+    print(empno, name, salary)
+f.close()
+```
+
+### ✍️ Writing to a File
+```python
+with open("output.txt", "w") as f:
+    f.write("Hello, World!\n")
+```
+Using `with` automatically closes the file when the block ends.
 
 ---
 <div align="center">

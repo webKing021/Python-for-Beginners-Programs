@@ -13,16 +13,16 @@ while(ch != 5):
 
     if(ch == 1):
         num = input("Enter binary number: ")
-        print(int(num, 2))  # Converts binary to decimal
+        print(int(num, 2))  
     elif(ch == 2):
         num = input("Enter octal number: ")
-        print(int(num, 8))  # Converts octal to decimal
+        print(int(num, 8))  
     elif(ch == 3):
         num = input("Enter hexadecimal number: ")
-        print(int(num, 16))  # Converts hexadecimal to decimal
+        print(int(num, 16))  
     elif(ch == 4):
         num = input("Enter base-32 number: ")
-        print(int(num, 32))  # Converts base-32 to decimal
+        print(int(num, 32))  
     elif(ch == 5):
         print("Exit")
     else:

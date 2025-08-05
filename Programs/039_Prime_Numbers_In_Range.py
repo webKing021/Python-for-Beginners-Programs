@@ -8,7 +8,7 @@ print(f"Prime numbers between {start} and {end} are:")
 for num in range(start, end + 1):
     if num > 1:
         prime = True
-        # Check if number is divisible by anything up to its square root
+
         for i in range(2, num):
             if num % i == 0:
                 prime = False
