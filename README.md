@@ -26,7 +26,9 @@
 16. 📋 [List Comprehensions](#-list-comprehensions)
 17. 🗑️ [Del Statement and Copy Operations](#️-del-statement-and-copy-operations)
 18. 📦 [Tuple Operations](#-tuple-operations)
-19. 💾 [File Handling](#-file-handling)
+19. 🧰 [Dictionary Essentials](#-dictionary-essentials)
+20. 📋 [List Quick Patterns](#-list-quick-patterns)
+21. 💾 [File Handling](#-file-handling)
 ---
 
 ## 📤 Basic Output
@@ -1281,13 +1283,112 @@ print(t)  # (1, 42, 99, 4, 5)
 
 ---
 
+## 🧰 Dictionary Essentials
+
+**Definition**: A dictionary stores key–value pairs. Keys are unique and hashable; values can be any type.
+
+### 🔹 Create
+```python
+d = {"id": 1, "name": "A"}
+e = dict(code=101, dept="IT")
+```
+
+### 🔹 Access / Update
+```python
+d["name"]           # KeyError if missing
+d.get("name", "NA") # Safe access with default
+d["salary"] = 50000  # Add or update
+```
+
+### 🔹 Remove
+```python
+del d["id"]         # Delete key
+d.pop("name", None)  # Remove with default
+d.clear()            # Remove all
+```
+
+### 🔹 Merge Dictionaries
+```python
+a = {"x": 1}
+b = {"y": 2, "x": 9}
+a | b            # {'x': 9, 'y': 2}  (Py 3.9+)
+a.update(b)      # In-place merge; returns None
+```
+
+### 🔍 Sort Dictionary (view as list)
+```python
+d = {"c": 3, "a": 1, "b": 2}
+sorted(d.items())                       # By key
+sorted(d.items(), key=lambda kv: kv[1]) # By value
+```
+
+### 🔍 Check Existence / Iterate
+```python
+"name" in d        # True if key exists
+for k, v in d.items():
+    pass
+```
+
+### 🔤 Character Type Checking
+```python
+print("123".isdigit())      # Outputs: True (only digits)
+print("abc".isalpha())      # Outputs: True (only alphabets)
+print("abc123".isalnum())   # Outputs: True (only alphanumeric)
+print("   ".isspace())      # Outputs: True (only whitespace)
+```
+
+### 0️⃣ Zero Fill
+```python
+print("123".zfill(5))  # Outputs: 00123
+print("123".zfill(2))  # Outputs: 123 (width less than string length)
+```
+
+---
+
+## 📋 List Quick Patterns
+
+**Definition**: Frequent list tasks that appear in exams, kept short and simple.
+
+### 🔹 Remove Duplicates
+```python
+lst = [1, 2, 2, 3]
+list(dict.fromkeys(lst))  # Preserves order: [1, 2, 3]
+list(set(lst))            # Unordered unique
+```
+
+### 🔹 Count Elements
+```python
+lst.count(2)              # Count a single value
+from collections import Counter
+Counter(lst)              # {1:1, 2:2, 3:1}
+```
+
+### 🔹 Multiply All Elements
+```python
+import math
+math.prod([1, 2, 3, 4])   # 24  (Py 3.8+)
+
+prod = 1
+for n in [1, 2, 3, 4]:
+    prod *= n             # 24
+```
+
+### 🔹 First N Terms (simple loops)
+```python
+n = 5
+[i for i in range(1, n+1)]  # 1..n
+```
+
+---
+
 ## 💾 File Handling
 
 **Definition**: Python provides built-in functions to read from and write to files using `open()`.
 
 ### 📂 Opening a File
 ```python
-# Open a file in read mode\ nf = open("emp.txt", "r")
+# Open a file in read mode
+nf = open("emp.txt", "r")
 ```
 Mode | Description
 ---- | -----------
