@@ -1329,6 +1329,78 @@ for k, v in d.items():
     pass
 ```
 
+### 🚀 Advanced Dictionary Patterns
+
+#### 🧩 Nested Dictionaries (create/access/update/delete)
+```python
+people = {
+    1: {"name": "krutarth", "roll": 21},
+    2: {"name": "het", "roll": 63},
+}
+# Access
+people[1]["name"]           # "krutarth"
+# Create / update nested
+people[3] = {}
+people[3]["name"] = "superman"
+people[3]["roll"] = 7
+# Delete nested key / whole entry
+del people[3]["roll"]
+del people[2]
+```
+
+#### 🔁 Nested Iteration over dict of dicts
+```python
+for pid, info in people.items():
+    print("key:", pid)
+    for k in info:
+        print(k, ":", info[k])
+```
+
+#### ➕➗ Sum and Product of numeric keys/values
+```python
+d = {1: 2, 2: 90, 3: 50}
+sum(d.values())   # 142
+sum(d.keys())     # 6
+prod = 1
+for v in d.values():
+    prod *= v       # 9000
+```
+
+#### 📊 Frequency count of values
+```python
+d = {1: 20, 2: 30, 3: 40, 4: 20}
+freq = {}
+for v in d.values():
+    freq[v] = freq.get(v, 0) + 1
+# freq -> {20: 2, 30: 1, 40: 1}
+```
+
+#### 🧹 Remove duplicate values (keep first occurrence)
+```python
+d = {1: "het", 2: "krutarth", 3: "superman", 4: "het"}
+unique = {}
+seen = set()
+for k, v in d.items():
+    if v not in seen:
+        unique[k] = v
+        seen.add(v)
+# unique -> {1: 'het', 2: 'krutarth', 3: 'superman'}
+```
+
+#### 🔢 Sorting only the values
+```python
+od = {1: 25, 2: 23, 3: 21}
+sorted_vals = sorted(od.values())  # [21, 23, 25]
+```
+
+#### ✏️ Modify value by key (from user input)
+```python
+d = {1: 20, 2: 30}
+key = int(input("Enter key: "))
+val = int(input("Enter value: "))
+d[key] = val
+```
+
 ### 🔤 Character Type Checking
 ```python
 print("123".isdigit())      # Outputs: True (only digits)
