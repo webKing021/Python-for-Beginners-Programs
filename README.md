@@ -24,11 +24,19 @@
 14. 🔤 [Vowels and Consonants](#-vowels-and-consonants)
 15. 🧵 [String Immutability](#-string-immutability)
 16. 📋 [List Comprehensions](#-list-comprehensions)
-17. 🗑️ [Del Statement and Copy Operations](#️-del-statement-and-copy-operations)
+17. 🗑️ [Del Statement and Copy Operations](#-del-statement-and-copy-operations)
 18. 📦 [Tuple Operations](#-tuple-operations)
 19. 🧰 [Dictionary Essentials](#-dictionary-essentials)
 20. 📋 [List Quick Patterns](#-list-quick-patterns)
 21. 💾 [File Handling](#-file-handling)
+22. ⚠️ [Exception Handling](#-exception-handling)
+23. 🧭 [Assertions](#-assertions)
+24. 🔧 [Functions](#-functions)
+25. 🧾 [Docstrings](#-docstrings)
+26. ⭐ [Arbitrary Positional Arguments](#-arbitrary-positional-arguments)
+27. 🔁 [Recursion](#-recursion)
+28. 🔄 [Call by Value vs Reference (Python)](#-call-by-value-vs-reference-python)
+
 ---
 
 ## 📤 Basic Output
@@ -1487,8 +1495,164 @@ with open("output.txt", "w") as f:
 Using `with` automatically closes the file when the block ends.
 
 ---
-<div align="center">
 
+## ⚠️ Exception Handling
+
+**Definition**: Handle runtime errors gracefully using `try`/`except` (and optional `else`/`finally`).
+
+**Syntax**:
+```python
+try:
+    # risky code
+except ExceptionType as e:
+    # handle error
+else:
+    # runs if no exception
+finally:
+    # always runs
+```
+
+**Example**:
+```python
+try:
+    x = int("12a")
+except ValueError as e:
+    print("Invalid number:", e)
+```
+
+---
+
+## 🧭 Assertions
+
+**Definition**: `assert` checks a condition during development; raises `AssertionError` if false.
+
+**Syntax**:
+```python
+assert condition, "optional message"
+```
+
+**Example**:
+```python
+age = 20
+assert age >= 0, "age must be non-negative"
+```
+
+---
+
+## 🔧 Functions
+
+**Definition**: Reusable blocks of code defined with `def`, optionally returning values.
+
+**Syntax**:
+```python
+def name(params):
+    """docstring"""
+    # body
+    return value
+```
+
+**Example**:
+```python
+def add(a, b):
+    return a + b
+print(add(2, 3))  # 5
+```
+
+---
+
+## 🧾 Docstrings
+
+**Definition**: String literals under a definition used to document modules, classes, and functions.
+
+**Syntax**:
+```python
+def func():
+    """Short description.
+
+    Optional details.
+    """
+    pass
+```
+
+**Example**:
+```python
+def greet(name):
+    """Return greeting for a name."""
+    return f"Hello, {name}!"
+```
+
+---
+
+## ⭐ Arbitrary Positional Arguments
+
+**Definition**: Use `*args` to accept variable number of positional arguments.
+
+**Syntax**:
+```python
+def func(*args):
+    # args is a tuple
+    pass
+```
+
+**Example**:
+```python
+def total(*nums):
+    return sum(nums)
+print(total(1, 2, 3))  # 6
+```
+
+---
+
+## 🔁 Recursion
+**Definition**: A function calling itself to solve a problem by reducing it to smaller subproblems. Requires a base case to stop.
+
+**Syntax (pattern)**:
+```python
+def rec(params):
+    if base_condition:
+        return base_value
+    # work + recursive call
+    return combine(rec(smaller_params))
+```
+
+**Examples**:
+```python
+# Fibonacci
+def fib(n):
+    if n <= 1:
+        return n
+    return fib(n-1) + fib(n-2)
+
+# Factorial
+def fact(n):
+    if n <= 1:
+        return 1
+    return n * fact(n-1)
+```
+
+---
+
+## 🔄 Call by Value vs Reference (Python)
+
+**Definition**: Python uses call-by-object-reference. Mutating mutable args affects caller; rebinding names does not.
+
+**Syntax**:
+```python
+def modify(seq, x):
+    seq.append(x)   # mutates (visible outside)
+    x = 99          # rebinds local only
+```
+
+**Example**:
+```python
+lst, n = [1, 2], 5
+modify(lst, n)
+print(lst, n)  # [1, 2, 5]  5
+```
+
+---
+
+<div align="center">
 ### 🐍 Happy Python Coding! 🐍
 
 *"The only way to learn a programming language is by writing programs in it." - Dennis Ritchie*
