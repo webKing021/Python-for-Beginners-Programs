@@ -36,6 +36,17 @@
 26. ⭐ [Arbitrary Positional Arguments](#-arbitrary-positional-arguments)
 27. 🔁 [Recursion](#-recursion)
 28. 🔄 [Call by Value vs Reference (Python)](#-call-by-value-vs-reference-python)
+29. 🎯 [Advanced Function Concepts](#-advanced-function-concepts)
+30. 🎨 [Decorators](#-decorators)
+31. 🔄 [Generators](#-generators)
+32. 📦 [Modules and Imports](#-modules-and-imports)
+33. 🧮 [Built-in Math Functions](#-built-in-math-functions)
+34. 🔤 [String Module](#-string-module)
+35. 🎲 [Random Module](#-random-module)
+36. 🔐 [Password Generation](#-password-generation)
+37. 📐 [Pascal's Triangle](#-pascals-triangle)
+38. 🔤 [Pangram Algorithm](#-pangram-algorithm)
+39. 🧠 [Common Algorithms](#-common-algorithms)
 
 ---
 
@@ -1648,6 +1659,444 @@ def modify(seq, x):
 lst, n = [1, 2], 5
 modify(lst, n)
 print(lst, n)  # [1, 2, 5]  5
+```
+
+---
+
+## 🎯 Advanced Function Concepts
+
+### 🔧 Function Facts
+**Definition**: Functions in Python are first-class objects that can be stored in variables, passed as arguments, and manipulated like any other object.
+
+```python
+def greet():
+    return "Hello"
+
+# Function as variable
+func_var = greet
+print(func_var())  # Outputs: Hello
+
+# Function in list
+func_list = [greet, 1, 2]
+
+# Function in dictionary
+func_dict = {greet: "greeting", "key": "value"}
+
+# Function as argument
+def call_func(func):
+    return func()
+
+print(call_func(greet))  # Outputs: Hello
+```
+
+### 🏗️ Nested Functions
+**Definition**: Functions defined inside other functions. Inner functions have access to variables in the outer function's scope.
+
+```python
+def outer_func(text):
+    def inner_func():
+        return text.upper()
+    return inner_func()
+
+print(outer_func("hello"))  # Outputs: HELLO
+```
+
+### 🔍 Magic Methods
+**Definition**: Special methods that provide information about function objects.
+
+```python
+def my_func():
+    pass
+
+print(my_func.__name__)  # Outputs: my_func
+print(id(my_func))       # Outputs: memory address
+```
+
+---
+
+## 🎨 Decorators
+
+### 🎭 Basic Decorator
+**Definition**: A decorator is a function that takes another function and extends its behavior without explicitly modifying it.
+
+**Syntax**:
+```python
+@decorator_name
+def function_name():
+    pass
+```
+
+```python
+def my_decorator(func):
+    def wrapper():
+        print("Before function call")
+        result = func()
+        print("After function call")
+        return result
+    return wrapper
+
+@my_decorator
+def greet():
+    return "Hello World!"
+
+greet()  # Outputs: Before function call, Hello World!, After function call
+```
+
+### 🔄 Null Decorator
+**Definition**: A decorator that returns the function unchanged, useful for conditional decoration.
+
+```python
+def null_decorator(func):
+    return func
+
+@null_decorator
+def greet():
+    return "Hello"
+
+print(greet())  # Outputs: Hello
+```
+
+---
+
+## 🔄 Generators
+
+### ⚡ Generator Functions
+**Definition**: Functions that use `yield` instead of `return` to produce a sequence of values lazily (one at a time).
+
+**Syntax**:
+```python
+def generator_function():
+    yield value1
+    yield value2
+    yield value3
+```
+
+```python
+def number_generator():
+    yield 1
+    yield 2
+    yield 3
+
+# Using generator
+for num in number_generator():
+    print(num)  # Outputs: 1, 2, 3
+
+# Generator object
+gen = number_generator()
+print(next(gen))  # Outputs: 1
+print(next(gen))  # Outputs: 2
+```
+
+### 💡 Generator Benefits
+- **Memory Efficient**: Values are generated on-demand
+- **Lazy Evaluation**: Only computes values when needed
+- **Infinite Sequences**: Can represent infinite data streams
+
+---
+
+## 📦 Modules and Imports
+
+### 📚 Module Basics
+**Definition**: A module is a file containing Python code that can be imported and used in other programs.
+
+### 🔄 Import Methods
+
+#### 1. Basic Import
+```python
+import module_name
+module_name.function_name()
+```
+
+#### 2. Import with Alias
+```python
+import module_name as alias
+alias.function_name()
+```
+
+#### 3. Import Specific Functions
+```python
+from module_name import function_name
+function_name()
+```
+
+#### 4. Import All Functions
+```python
+from module_name import *
+function_name()
+```
+
+### 📝 Example Usage
+```python
+# Using Circle module
+import Circle
+print(Circle.area(5))           # Using module.function
+
+import Circle as C
+print(C.circumference(5))       # Using alias
+
+from Circle import area
+print(area(5))                  # Direct function call
+
+from Circle import *
+print(volume(5))                # All functions available
+```
+
+---
+
+## 🧮 Built-in Math Functions
+
+### 📊 Math Module
+**Definition**: The `math` module provides mathematical functions and constants.
+
+```python
+import math
+
+# Ceiling and Floor
+math.ceil(2.1)    # Outputs: 3 (round up)
+math.floor(2.9)   # Outputs: 2 (round down)
+
+# Absolute value
+math.fabs(-5.5)   # Outputs: 5.5
+
+# Mathematical operations
+math.factorial(5) # Outputs: 120
+math.sqrt(16)     # Outputs: 4.0
+math.pow(2, 3)    # Outputs: 8.0
+math.log(10)      # Natural logarithm
+
+# Greatest Common Divisor
+math.gcd(15, 25)  # Outputs: 5
+```
+
+### 🔢 Common Math Functions
+| Function | Description | Example |
+|----------|-------------|---------|
+| `ceil(x)` | Round up to nearest integer | `ceil(2.1)` → `3` |
+| `floor(x)` | Round down to nearest integer | `floor(2.9)` → `2` |
+| `fabs(x)` | Absolute value | `fabs(-5)` → `5.0` |
+| `sqrt(x)` | Square root | `sqrt(16)` → `4.0` |
+| `pow(x, y)` | x raised to power y | `pow(2, 3)` → `8.0` |
+| `factorial(x)` | Factorial of x | `factorial(5)` → `120` |
+
+---
+
+## 🔤 String Module
+
+### 📝 String Constants
+**Definition**: The `string` module provides useful constants for string operations.
+
+```python
+import string
+
+# Available constants
+print(string.ascii_letters)    # abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+print(string.ascii_lowercase)  # abcdefghijklmnopqrstuvwxyz
+print(string.ascii_uppercase)  # ABCDEFGHIJKLMNOPQRSTUVWXYZ
+print(string.digits)           # 0123456789
+print(string.punctuation)      # !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
+```
+
+### 🎯 Common Use Cases
+- Password generation
+- Input validation
+- Character classification
+- Text processing
+
+---
+
+## 🎲 Random Module
+
+### 🎯 Random Number Generation
+**Definition**: The `random` module provides functions for generating random numbers and making random choices.
+
+```python
+import random
+
+# Random float between 0 and 1
+random.random()
+
+# Random integer in range
+random.randint(1, 10)     # Random int between 1 and 10 (inclusive)
+
+# Random choice from sequence
+random.choice([1, 2, 3, 4, 5])
+
+# Random sample
+random.sample([1, 2, 3, 4, 5], 3)  # 3 random elements
+
+# Shuffle list in place
+my_list = [1, 2, 3, 4, 5]
+random.shuffle(my_list)
+```
+
+---
+
+## 🔐 Password Generation
+
+### 🔑 Random Password Algorithm
+**Definition**: Combining `random` and `string` modules to generate secure passwords.
+
+```python
+import random
+import string
+
+def generate_password(length):
+    # Character pool
+    characters = string.ascii_letters + string.digits + string.punctuation
+    
+    # Generate password
+    password = ''.join(random.choice(characters) for i in range(length))
+    return password
+
+# Usage
+password = generate_password(12)
+print(password)  # Example: aB3$xY9@mN2!
+```
+
+### 🛡️ Password Components
+- **Letters**: `string.ascii_letters` (a-z, A-Z)
+- **Digits**: `string.digits` (0-9)
+- **Symbols**: `string.punctuation` (special characters)
+
+---
+
+## 📐 Pascal's Triangle
+
+### 🔺 Pascal's Triangle Algorithm
+**Definition**: A triangular array where each number is the sum of the two numbers above it, calculated using combinations (nCr).
+
+**Formula**: `nCr = n! / (r! * (n-r)!)`
+
+```python
+from math import factorial
+
+def pascal_triangle(n):
+    for i in range(n):
+        # Left padding
+        for j in range(n - i + 1):
+            print(end=" ")
+        
+        # Print values
+        for j in range(i + 1):
+            value = factorial(i) // (factorial(j) * factorial(i - j))
+            print(value, end=" ")
+        
+        print()  # New line
+
+pascal_triangle(5)
+```
+
+### 📋 Algorithm Steps
+1. Take number of rows (n)
+2. For each row i from 0 to n:
+   - Add left spacing
+   - Calculate nCr for each position j
+   - Print the value
+   - Move to next line
+
+---
+
+## 🔤 Pangram Algorithm
+
+### 🔍 Pangram Detection
+**Definition**: A pangram is a sentence containing every letter of the alphabet at least once.
+
+```python
+import string
+
+def is_pangram(sentence):
+    # Convert to lowercase
+    sentence = sentence.lower()
+    
+    # Get unique alphabetic characters
+    letters = set(filter(str.isalpha, sentence))
+    
+    # Check if all 26 letters are present
+    return len(letters) == 26
+
+# Test
+text = "The quick brown fox jumps over the lazy dog"
+print(is_pangram(text))  # Outputs: True
+```
+
+### 📋 Algorithm Steps
+1. Convert sentence to lowercase
+2. Filter only alphabetic characters
+3. Create set of unique letters
+4. Check if set contains all 26 alphabet letters
+
+---
+
+## 🧠 Common Algorithms
+
+### 🔢 Maximum of Three Numbers
+```python
+def max_of_three(a, b, c):
+    return max(a, b, c)
+```
+
+### ➕ Sum of List Elements
+```python
+def sum_list(nums):
+    return sum(nums)
+```
+
+### ✖️ Product of List Elements
+```python
+def multiply_list(nums):
+    result = 1
+    for num in nums:
+        result *= num
+    return result
+```
+
+### 🔄 String Reversal
+```python
+def reverse_string(s):
+    return s[::-1]
+```
+
+### 📊 Range Check
+```python
+def in_range(num, start, end):
+    return start <= num <= end
+```
+
+### 🎯 Remove Duplicates
+```python
+def remove_duplicates(nums):
+    return list(set(nums))
+```
+
+### 🔢 Even Numbers Filter
+```python
+def get_even_numbers(nums):
+    return [num for num in nums if num % 2 == 0]
+```
+
+### 🔤 Sort Hyphen-Separated Words
+```python
+def sort_hyphenated(text):
+    words = text.split("-")
+    words.sort()
+    return "-".join(words)
+```
+
+### 2️⃣ Prime Number Check
+```python
+def is_prime(num):
+    if num < 2:
+        return False
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
+```
+
+### 🔄 Palindrome Check
+```python
+def is_palindrome(s):
+    return s == s[::-1]
 ```
 
 ---
