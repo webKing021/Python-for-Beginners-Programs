@@ -47,6 +47,8 @@
 37. 📐 [Pascal's Triangle](#-pascals-triangle)
 38. 🔤 [Pangram Algorithm](#-pangram-algorithm)
 39. 🧠 [Common Algorithms](#-common-algorithms)
+40. 📁 [Advanced File Handling](#-advanced-file-handling)
+41. 📋 [File CRUD Operations](#-file-crud-operations)
 
 ---
 
@@ -2101,8 +2103,270 @@ def is_palindrome(s):
 
 ---
 
+## 📁 Advanced File Handling
+
+### 📂 File Object Properties
+**Definition**: File objects have built-in attributes that provide information about the file's state and properties.
+
+```python
+f = open("data.txt", "r")
+
+# File properties
+print(f.name)     # Outputs: data.txt (filename)
+print(f.mode)     # Outputs: r (file mode)
+print(f.closed)   # Outputs: False (file status)
+print(f.errors)   # Error handling method
+
+f.close()
+print(f.closed)   # Outputs: True (after closing)
+```
+
+### 📖 File Reading Methods
+
+#### 1. `read()` Method
+**Definition**: Reads specified number of characters from file, or entire file if no parameter given.
+
+```python
+f = open("data.txt", "r")
+content = f.read(20)    # Read first 20 characters
+all_content = f.read()  # Read entire file
+f.close()
+```
+
+#### 2. `readline()` Method
+**Definition**: Reads one line at a time from the file and returns it as a string.
+
+```python
+f = open("data.txt", "r")
+first_line = f.readline()  # Returns first line as string
+print(type(first_line))    # <class 'str'>
+f.close()
+```
+
+#### 3. `readlines()` Method
+**Definition**: Reads all lines from file and returns them as a list of strings.
+
+```python
+f = open("data.txt", "r")
+all_lines = f.readlines()  # Returns list of all lines
+print(type(all_lines))     # <class 'list'>
+print(len(all_lines))      # Number of lines
+f.close()
+```
+
+### 🎯 File Pointer Methods
+
+#### `tell()` Method
+**Definition**: Returns current position of file pointer (cursor) in the file.
+
+```python
+f = open("data.txt", "r")
+position = f.tell()  # Returns current position (integer)
+print(position)      # Outputs: 0 (at beginning)
+f.close()
+```
+
+#### `seek()` Method
+**Definition**: Moves file pointer to specified position in the file.
+
+```python
+f = open("data.txt", "r")
+f.seek(10)          # Move pointer to position 10
+content = f.read()  # Read from position 10 onwards
+f.close()
+```
+
+### ✍️ File Writing Methods
+
+#### Write Mode (`"w"`)
+**Definition**: Opens file for writing, overwrites existing content.
+
+```python
+f = open("data.txt", "w")
+f.write("Hello World\n")
+f.write("Python Programming")
+f.close()
+```
+
+#### Append Mode (`"a"`)
+**Definition**: Opens file for writing, adds content to the end without overwriting.
+
+```python
+f = open("data.txt", "a")
+f.write("New line\n")
+f.write("Another line")
+f.close()
+```
+
+### 🔢 Binary Mode
+**Definition**: Opens file in binary mode for reading/writing binary data.
+
+```python
+# Binary read
+f = open("data.txt", "rb")
+binary_data = f.read()
+print(type(binary_data))  # <class 'bytes'>
+f.close()
+
+# Binary write
+f = open("data.txt", "wb")
+f.write(b"Binary content")
+f.close()
+```
+
+### 📊 CSV File Handling
+**Definition**: Working with comma-separated values for structured data storage.
+
+```python
+# Writing CSV data
+f = open("employees.csv", "w")
+f.write("Name,Salary,Department\n")
+f.write("John,50000,IT\n")
+f.write("Alice,60000,HR\n")
+f.close()
+
+# Reading CSV data
+f = open("employees.csv", "r")
+for line in f:
+    name, salary, dept = line.strip().split(",")
+    print(f"Name: {name}, Salary: {salary}")
+f.close()
+```
+
+---
+
+## 📋 File CRUD Operations
+
+### 🏗️ CRUD Overview
+**Definition**: CRUD stands for Create, Read, Update, Delete - the four basic operations for data management.
+
+### 1. 📝 Create Operation
+**Definition**: Adding new records to a file.
+
+```python
+def create_record():
+    f = open("data.txt", "a")
+    name = input("Enter name: ")
+    age = input("Enter age: ")
+    f.write(f"{name},{age}\n")
+    f.close()
+    print("Record created successfully!")
+```
+
+### 2. 📖 Read Operation
+**Definition**: Displaying all records from a file.
+
+```python
+def read_records():
+    try:
+        f = open("data.txt", "r")
+        print("All Records:")
+        for line in f:
+            print(line.strip())
+        f.close()
+    except FileNotFoundError:
+        print("File not found!")
+```
+
+### 3. ✏️ Update Operation
+**Definition**: Modifying existing records in a file by creating a temporary file.
+
+```python
+def update_record():
+    search_id = input("Enter ID to update: ")
+    new_value = input("Enter new value: ")
+    
+    f = open("data.txt", "r")
+    temp_f = open("temp.txt", "w")
+    
+    for line in f:
+        record_id, data = line.strip().split(",", 1)
+        if record_id == search_id:
+            temp_f.write(f"{record_id},{new_value}\n")
+            print("Record updated!")
+        else:
+            temp_f.write(line)
+    
+    f.close()
+    temp_f.close()
+```
+
+### 4. 🗑️ Delete Operation
+**Definition**: Removing specific records from a file.
+
+```python
+def delete_record():
+    search_id = input("Enter ID to delete: ")
+    
+    f = open("data.txt", "r")
+    temp_f = open("temp.txt", "w")
+    found = False
+    
+    for line in f:
+        record_id, data = line.strip().split(",", 1)
+        if record_id == search_id:
+            print(f"Record {record_id} deleted!")
+            found = True
+        else:
+            temp_f.write(line)
+    
+    f.close()
+    temp_f.close()
+    
+    if not found:
+        print("Record not found!")
+```
+
+### 🔄 Menu-Driven CRUD System
+**Definition**: A complete system combining all CRUD operations with user menu.
+
+```python
+def file_crud_menu():
+    while True:
+        print("\n=== File CRUD Menu ===")
+        print("1. Create Record")
+        print("2. Read Records") 
+        print("3. Update Record")
+        print("4. Delete Record")
+        print("5. Exit")
+        
+        choice = int(input("Enter choice: "))
+        
+        if choice == 1:
+            create_record()
+        elif choice == 2:
+            read_records()
+        elif choice == 3:
+            update_record()
+        elif choice == 4:
+            delete_record()
+        elif choice == 5:
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice!")
+```
+
+### 💡 CRUD Best Practices
+- **Always close files** after operations
+- **Use try-except** for error handling
+- **Create temporary files** for update/delete operations
+- **Validate user input** before processing
+- **Provide user feedback** for all operations
+
+### 🔧 File Operation Modes Summary
+| Mode | Description | Use Case |
+|------|-------------|----------|
+| `"r"` | Read only | Reading existing files |
+| `"w"` | Write (overwrite) | Creating new files |
+| `"a"` | Append | Adding to existing files |
+| `"rb"` | Binary read | Reading binary files |
+| `"wb"` | Binary write | Writing binary files |
+
+---
+
 <div align="center">
-### 🐍 Happy Python Coding! 🐍
+🐍 Happy Python Coding! 🐍
 
 *"The only way to learn a programming language is by writing programs in it." - Dennis Ritchie*
 
