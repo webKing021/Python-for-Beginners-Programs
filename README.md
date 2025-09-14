@@ -1426,21 +1426,6 @@ key = int(input("Enter key: "))
 val = int(input("Enter value: "))
 d[key] = val
 ```
-
-### 🔤 Character Type Checking
-```python
-print("123".isdigit())      # Outputs: True (only digits)
-print("abc".isalpha())      # Outputs: True (only alphabets)
-print("abc123".isalnum())   # Outputs: True (only alphanumeric)
-print("   ".isspace())      # Outputs: True (only whitespace)
-```
-
-### 0️⃣ Zero Fill
-```python
-print("123".zfill(5))  # Outputs: 00123
-print("123".zfill(2))  # Outputs: 123 (width less than string length)
-```
-
 ---
 
 ## 📋 List Quick Patterns
