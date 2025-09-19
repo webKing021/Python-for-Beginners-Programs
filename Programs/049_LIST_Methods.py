@@ -1,7 +1,7 @@
 l = [1, 2, 3, 4, 5]
 l2 = [10, 20, 30, 40, 50]
 
-ch = 12
+ch = 13
 while (ch != 12):
     print("MENU")
     print("1. Display list elements")

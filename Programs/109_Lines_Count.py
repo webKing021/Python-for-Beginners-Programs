@@ -22,7 +22,7 @@ f = open("num.txt","r")
 data = f.read()
 cnt = 0
 for i in data:
-    cnt += i
+    cnt += 1
     print("The characters are:",cnt)
 f.close()
 
@@ -30,7 +30,8 @@ f.close()
 #Employee Dictionary
 d = {0 :[1,"aaa",1000],1 : [2,"Het",5000],2:[3,"Krutarth",8900]}
 tot = 0
-for k,v in d.items():
-    print(k)
-    tot = tot + v[2]
+for v in d.values():
+    print(v[2])
+    print(type(v[2]))
+    tot=tot+v[2]
     print("Total Salary is:",tot)

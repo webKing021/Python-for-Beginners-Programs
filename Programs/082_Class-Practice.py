@@ -38,9 +38,11 @@ for i in d.values():
 print(a)
 
 # 7. wap remove duplicate
-d3 = {}
-for i in d1.values():
-    print(i)
-    if i not in d3.values():
-        d3[i] = i
-print(d3)
+d1 = {1: 10, 2: 20, 3: 20, 4: 30}
+d2 = {}
+
+for v in d1.values():
+    if v not in d2.values():
+        d2[v] = v
+
+print(d2)

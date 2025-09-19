@@ -20,7 +20,7 @@ for key, r in nd.items():
     print("value : " , r)
 
 for key in r:
-    print(key + " : " + r[key])
+    print(key , " : " , r[key])
 
 # Example - 1 : salary slip
 
