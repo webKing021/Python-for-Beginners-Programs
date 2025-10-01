@@ -54,6 +54,16 @@
 44. 📝 [Advanced File Methods](#-advanced-file-methods)
 45. 📊 [File Analysis Operations](#-file-analysis-operations)
 46. 🔧 [File Utility Functions](#-file-utility-functions)
+47. 🏛️ [Object-Oriented Programming (OOP)](#-object-oriented-programming-oop)
+48. 🎓 [Classes and Objects](#-classes-and-objects)
+49. 🔧 [Class Methods and Attributes](#-class-methods-and-attributes)
+50. 🏗️ [Constructors and self](#-constructors-and-self)
+51. 🧬 [Inheritance](#-inheritance)
+52. 🔀 [Polymorphism](#-polymorphism)
+53. 🔒 [Encapsulation](#-encapsulation)
+54. 🎭 [Abstraction](#-abstraction)
+55. ⚙️ [Operator Overloading](#-operator-overloading)
+56. 🔄 [Method Overloading and Overriding](#-method-overloading-and-overriding)
 
 ---
 
@@ -2764,6 +2774,550 @@ def process_employee_data():
     
     print(f"Total Salary: {total_salary}")
     return total_salary
+```
+
+---
+
+## 🏛️ Object-Oriented Programming (OOP)
+
+### 📋 OOP Core Concepts
+**Definition**: Object-Oriented Programming is a programming paradigm based on objects that contain data and code.
+
+### 🔑 Key OOP Terms
+| Term | Definition |
+|------|------------|
+| **Class** | Blueprint or template for creating objects |
+| **Object** | Instance of a class (real-world entity) |
+| **Attributes** | Properties or data stored in an object |
+| **Methods** | Functions defined inside a class |
+| **self** | Reference to the current instance of the class |
+| **Constructor** | Special method `__init__()` to initialize objects |
+
+---
+
+## 🎓 Classes and Objects
+
+### 📘 Class Definition
+**Definition**: A class is a user-defined blueprint for creating objects with shared attributes and methods.
+
+**Syntax**:
+```python
+class ClassName:
+    # class body
+    pass
+```
+
+```python
+# Define a class
+class Student:
+    name = "Default"  # Class attribute
+    
+    def display(self):
+        print(f"Student: {self.name}")
+
+# Create objects
+student1 = Student()
+student2 = Student()
+
+print(type(student1))  # <class '__main__.Student'>
+```
+
+### 🎯 Creating Objects
+**Definition**: Objects are instances of a class created using the class name followed by parentheses.
+
+```python
+class Car:
+    color = "Red"
+
+# Creating objects
+car1 = Car()
+car2 = Car()
+
+print(car1.color)  # Red
+print(car2.color)  # Red
+```
+
+---
+
+## 🔧 Class Methods and Attributes
+
+### 📦 Class Attributes
+**Definition**: Variables shared by all instances of a class, defined directly in the class.
+
+```python
+class Student:
+    school = "ABC School"  # Class attribute (shared)
+    
+    def __init__(self, name):
+        self.name = name  # Instance attribute (unique)
+
+s1 = Student("Alice")
+s2 = Student("Bob")
+
+print(s1.school)  # ABC School (shared)
+print(s2.school)  # ABC School (shared)
+print(s1.name)    # Alice (unique)
+print(s2.name)    # Bob (unique)
+```
+
+### 🎯 Instance Attributes
+**Definition**: Variables unique to each object instance, typically defined in `__init__`.
+
+```python
+class Person:
+    def __init__(self, name, age):
+        self.name = name  # Instance attribute
+        self.age = age    # Instance attribute
+
+p1 = Person("John", 25)
+p2 = Person("Jane", 30)
+```
+
+### 📊 Class Variable Counter
+**Definition**: Using class variables to track the number of instances created.
+
+```python
+class Student:
+    count = 0  # Class variable
+    
+    def __init__(self, name):
+        self.name = name
+        Student.count += 1
+
+s1 = Student("Alice")
+s2 = Student("Bob")
+print(Student.count)  # 2
+```
+
+### 📝 Instance Methods
+**Definition**: Functions defined inside a class that operate on instance data.
+
+```python
+class Calculator:
+    def add(self, a, b):
+        return a + b
+    
+    def subtract(self, a, b):
+        return a - b
+
+calc = Calculator()
+print(calc.add(5, 3))       # 8
+print(calc.subtract(10, 4))  # 6
+```
+
+---
+
+## 🏗️ Constructors and self
+
+### 🔨 Constructor (`__init__`)
+**Definition**: Special method automatically called when an object is created to initialize attributes.
+
+**Syntax**:
+```python
+def __init__(self, parameters):
+    # initialization code
+```
+
+```python
+class Account:
+    def __init__(self, holder, balance):
+        self.holder = holder
+        self.balance = balance
+
+acc = Account("John", 1000)
+print(acc.holder)   # John
+print(acc.balance)  # 1000
+```
+
+### 🔍 The `self` Parameter
+**Definition**: Reference to the current instance of the class, used to access instance attributes and methods.
+
+```python
+class Person:
+    def __init__(self, name):
+        self.name = name  # self refers to the object
+    
+    def greet(self):
+        print(f"Hello, I am {self.name}")
+
+p = Person("Alice")
+p.greet()  # Hello, I am Alice
+```
+
+### 💰 Account Class Example
+**Definition**: Real-world banking account with deposit, withdraw, and transfer operations.
+
+```python
+class Account:
+    def __init__(self, holder, number, balance, credit_line=1500):
+        self.holder = holder
+        self.number = number
+        self.balance = balance
+        self.credit_line = credit_line
+    
+    def deposit(self, amount):
+        self.balance += amount
+    
+    def withdraw(self, amount):
+        if self.balance - amount < -self.credit_line:
+            return False
+        self.balance -= amount
+        return True
+    
+    def transfer(self, target, amount):
+        if self.withdraw(amount):
+            target.deposit(amount)
+            return True
+        return False
+
+# Usage
+acc1 = Account("Alice", "123", 1000)
+acc2 = Account("Bob", "456", 500)
+acc1.transfer(acc2, 200)
+```
+
+### 📚 Docstrings
+**Definition**: Documentation strings for classes and methods accessed via `__doc__`.
+
+```python
+class Person:
+    """This class represents a person with name and age"""
+    def __init__(self, name):
+        self.name = name
+
+print(Person.__doc__)  # This class represents a person...
+```
+
+---
+
+## 🧬 Inheritance
+
+### 👨‍👩‍👦 Inheritance Basics
+**Definition**: Mechanism where a new class (child) derives properties and methods from an existing class (parent).
+
+**Syntax**:
+```python
+class ParentClass:
+    pass
+
+class ChildClass(ParentClass):
+    pass
+```
+
+### 🔗 Single Inheritance
+**Definition**: A child class inherits from a single parent class.
+
+```python
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+    
+    def display(self):
+        print(f"Name: {self.name}, Age: {self.age}")
+
+class Student(Person):
+    def __init__(self, name, age, roll_no, marks):
+        super().__init__(name, age)  # Call parent constructor
+        self.roll_no = roll_no
+        self.marks = marks
+    
+    def show_details(self):
+        print(f"Roll No: {self.roll_no}, Marks: {self.marks}")
+
+# Usage
+s = Student("Alice", 20, 101, 95)
+s.display()       # Inherited method
+s.show_details()  # Child class method
+```
+
+### 🔝 super() Function
+**Definition**: Built-in function to call methods from the parent class.
+
+```python
+class Parent:
+    def __init__(self, name):
+        self.name = name
+
+class Child(Parent):
+    def __init__(self, name, age):
+        super().__init__(name)  # Call parent's __init__
+        self.age = age
+```
+
+### 💡 Inheritance Benefits
+- **Code Reusability**: Reuse parent class code
+- **Extensibility**: Add new features to existing classes
+- **Organization**: Logical hierarchy of classes
+- **Maintenance**: Changes in parent reflect in children
+
+---
+
+## 🔀 Polymorphism
+
+### 🎭 Polymorphism Concept
+**Definition**: Ability to use a common interface for different data types or objects.
+
+```python
+class Dog:
+    def speak(self):
+        return "Woof!"
+
+class Cat:
+    def speak(self):
+        return "Meow!"
+
+class Bird:
+    def speak(self):
+        return "Chirp!"
+
+# Polymorphic function
+def animal_sound(animal):
+    print(animal.speak())
+
+dog = Dog()
+cat = Cat()
+bird = Bird()
+
+animal_sound(dog)   # Woof!
+animal_sound(cat)   # Meow!
+animal_sound(bird)  # Chirp!
+```
+
+### 🔄 Method Resolution
+**Definition**: Python uses Method Resolution Order (MRO) to determine which method to call.
+
+```python
+class Person:
+    def show(self):
+        print("I am a Person")
+
+class Teacher(Person):
+    def show(self):
+        print("I am a Teacher")
+
+p = Person()
+t = Teacher()
+p.show()  # I am a Person
+t.show()  # I am a Teacher
+```
+
+---
+
+## 🔒 Encapsulation
+
+### 🛡️ Data Hiding
+**Definition**: Restricting access to certain attributes and methods by making them private.
+
+**Syntax**:
+```python
+self.__attribute  # Private attribute (name mangling)
+self._attribute   # Protected attribute (convention)
+```
+
+```python
+class Account:
+    def __init__(self, balance):
+        self.__balance = balance  # Private attribute
+    
+    def deposit(self, amount):
+        self.__balance += amount
+    
+    def get_balance(self):
+        return self.__balance
+
+acc = Account(1000)
+acc.deposit(500)
+print(acc.get_balance())  # 1500
+# print(acc.__balance)    # AttributeError
+```
+
+### 🔐 Access Modifiers
+| Type | Syntax | Access Level |
+|------|--------|--------------|
+| Public | `self.attribute` | Accessible everywhere |
+| Protected | `self._attribute` | Convention (still accessible) |
+| Private | `self.__attribute` | Name mangling (harder to access) |
+
+```python
+class MyClass:
+    def __init__(self):
+        self.public = "Public"
+        self._protected = "Protected"
+        self.__private = "Private"
+
+obj = MyClass()
+print(obj.public)     # ✅ Works
+print(obj._protected) # ✅ Works (convention only)
+# print(obj.__private) # ❌ AttributeError
+```
+
+---
+
+## 🎭 Abstraction
+
+### 🎨 Abstract Classes
+**Definition**: Classes that cannot be instantiated and serve as blueprints for other classes.
+
+```python
+from abc import ABC, abstractmethod
+
+class Shape(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+    
+    @abstractmethod
+    def perimeter(self):
+        pass
+
+class Rectangle(Shape):
+    def __init__(self, length, width):
+        self.length = length
+        self.width = width
+    
+    def area(self):
+        return self.length * self.width
+    
+    def perimeter(self):
+        return 2 * (self.length + self.width)
+
+rect = Rectangle(5, 3)
+print(rect.area())       # 15
+print(rect.perimeter())  # 16
+```
+
+### 📋 Abstract Methods
+**Definition**: Methods declared in abstract class but implemented in child classes.
+
+```python
+from abc import ABC, abstractmethod
+
+class Animal(ABC):
+    @abstractmethod
+    def make_sound(self):
+        pass
+
+class Dog(Animal):
+    def make_sound(self):
+        return "Bark"
+
+dog = Dog()
+print(dog.make_sound())  # Bark
+```
+
+---
+
+## ⚙️ Operator Overloading
+
+### ➕ Overloading Operators
+**Definition**: Defining custom behavior for operators (+, -, *, etc.) in user-defined classes.
+
+```python
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+    
+    def __add__(self, other):
+        return Point(self.x + other.x, self.y + other.y)
+    
+    def __repr__(self):
+        return f"Point({self.x}, {self.y})"
+
+p1 = Point(2, 3)
+p2 = Point(4, 5)
+p3 = p1 + p2  # Calls __add__
+print(p3)  # Point(6, 8)
+```
+
+### 🔢 Common Magic Methods
+| Operator | Method | Example |
+|----------|--------|---------|
+| `+` | `__add__` | `obj1 + obj2` |
+| `-` | `__sub__` | `obj1 - obj2` |
+| `*` | `__mul__` | `obj1 * obj2` |
+| `/` | `__truediv__` | `obj1 / obj2` |
+| `==` | `__eq__` | `obj1 == obj2` |
+| `<` | `__lt__` | `obj1 < obj2` |
+| `str()` | `__str__` | `str(obj)` |
+| `repr()` | `__repr__` | `repr(obj)` |
+
+---
+
+## 🔄 Method Overloading and Overriding
+
+### 🔁 Method Overriding
+**Definition**: Redefining a parent class method in the child class with the same name.
+
+```python
+class Parent:
+    def show(self):
+        print("Parent class method")
+
+class Child(Parent):
+    def show(self):
+        print("Child class method (Overridden)")
+
+c = Child()
+c.show()  # Child class method (Overridden)
+```
+
+### 🔄 Method Overloading (Simulated)
+**Definition**: Python doesn't support traditional method overloading, but it can be simulated using default arguments.
+
+```python
+class Calculator:
+    def add(self, a=None, b=None, c=None):
+        if a and b and c:
+            return a + b + c
+        elif a and b:
+            return a + b
+        else:
+            return a
+
+calc = Calculator()
+print(calc.add(2, 3))      # 5
+print(calc.add(2, 3, 4))   # 9
+```
+
+### 📚 List-based Class with CRUD
+**Definition**: Creating a class to manage a set of integers with insert, member, remove operations.
+
+```python
+class IntSet:
+    def __init__(self):
+        self.vals = []
+    
+    def insert(self, e):
+        if e not in self.vals:
+            self.vals.append(e)
+    
+    def member(self, e):
+        return e in self.vals
+    
+    def remove(self, e):
+        try:
+            self.vals.remove(e)
+        except:
+            raise ValueError(f"{e} not found")
+    
+    def getMembers(self):
+        return self.vals[:]
+    
+    def __str__(self):
+        self.vals.sort()
+        return "{" + ", ".join(str(e) for e in self.vals) + "}"
+
+# Usage
+s = IntSet()
+s.insert(5)
+s.insert(10)
+s.insert(3)
+print(s)              # {3, 5, 10}
+print(s.member(5))    # True
+s.remove(5)
+print(s.getMembers()) # [3, 10]
 ```
 
 ---
